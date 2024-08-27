@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício - Objeto Estudante</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #ececec; 
+            color: #4a4a4a;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 3px solid #a71d31; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #a71d31; 
+            text-align: center; 
+        }
+
+        .output {
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid #a71d31; 
+            background-color: #fce4ec; 
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .output h2 {
+            margin-top: 0;
+            color: #990000; 
+        }
+
+        .output p {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Exercício - Objeto Estudante</h1>
+        <p>Crie o Objeto: <strong>Estudante1</strong> (propriedades: <strong>Matrícula</strong>, <strong>Nome</strong>).</p>
+        <p>Atribua valores para as propriedades utilizando 3 métodos diferentes:</p>
+
+        <div class="output">
+            <h2>Método 1: Objeto Literal</h2>
+            <p id="metodo1"></p>
+        </div>
+
+        <div class="output">
+            <h2>Método 2: Função Construtora</h2>
+            <p id="metodo2"></p>
+        </div>
+
+        <div class="output">
+            <h2>Método 3: Classe</h2>
+            <p id="metodo3"></p>
+        </div>
+    </div>
+
+    <script>
+       
+        let estudante1 = {
+            Matricula: '0000347223324',
+            Nome: 'Caio de Oliveira'
+        };
+        document.getElementById('metodo1').textContent = `Matrícula: ${estudante1.Matricula}, Nome: ${estudante1.Nome}`;
+
+      
+        function Estudante(Matricula, Nome) {
+            this.Matricula = Matricula;
+            this.Nome = Nome;
+        }
+
+        let estudante2 = new Estudante('000027222432', 'Livia Andrade');
+        document.getElementById('metodo2').textContent = `Matrícula: ${estudante2.Matricula}, Nome: ${estudante2.Nome}`;
+
+        
+        class EstudanteClasse {
+            constructor(Matricula, Nome) {
+                this.Matricula = Matricula;
+                this.Nome = Nome;
+            }
+        }
+
+        let estudante3 = new EstudanteClasse('00043428377', 'Lucas Matheus');
+        document.getElementById('metodo3').textContent = `Matrícula: ${estudante3.Matricula}, Nome: ${estudante3.Nome}`;
+    </script>
+</body>
+</html>

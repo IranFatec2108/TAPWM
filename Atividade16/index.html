@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condição da Janela</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #e8e8e8;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        #status {
+            margin-bottom: 25px;
+            font-size: 20px;
+            color: #555;
+        }
+
+        img {
+            width: 320px;
+            height: auto;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h1>Status da Janela</h1>
+    <h1 id="status">Janela Fechada</h1>
+    <img id="janela" src="fechada.avif" alt="Janela Fechada">
+
+    <script>
+        const janelaImg = document.getElementById('janela');
+        const statusTexto = document.getElementById('status');
+
+        const imagensJanela = {
+            fechada: 'fechada.avif',
+            aberta: 'aberta.jpeg',
+            quebrada: 'quebrada.jpeg'
+        };
+
+        function atualizarStatus(src, texto) {
+            janelaImg.src = src;
+            statusTexto.textContent = texto;
+        }
+
+        janelaImg.addEventListener('mouseover', () => {
+            if (janelaImg.src.endsWith(imagensJanela.fechada)) {
+                atualizarStatus(imagensJanela.aberta, "Janela Aberta");
+            }
+        });
+
+        janelaImg.addEventListener('mouseout', () => {
+            if (janelaImg.src.endsWith(imagensJanela.aberta)) {
+                atualizarStatus(imagensJanela.fechada, "Janela Fechada");
+            }
+        });
+
+        janelaImg.addEventListener('click', () => {
+            atualizarStatus(imagensJanela.quebrada, "Janela Quebrada");
+        });
+    </script>
+</body>
+</html>

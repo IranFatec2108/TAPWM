@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios de Classes em JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #555;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #b36b00;
+            background-color: #ffebcc;
+            border-radius: 5px;
+            color: #663300;
+        }
+
+        button {
+            background-color: #8c1aff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #7300e6;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group label {
+            margin-right: 10px;
+        }
+
+        .input-group input {
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exercícios de Classes em JavaScript</h1>
+
+    <h2>Exercício 1: Classe Retângulo</h2>
+    <div class="input-group">
+        <label for="base">Base (cm):</label>
+        <input type="number" id="base" placeholder="Insira a base">
+    </div>
+    <div class="input-group">
+        <label for="altura">Altura (cm):</label>
+        <input type="number" id="altura" placeholder="Insira a altura">
+    </div>
+    <button onclick="calcularAreaRetangulo()">Calcular Área do Retângulo</button>
+    <div id="output-retangulo" class="output"></div>
+
+    <h2>Exercício 2: Classe Conta, Corrente e Poupança</h2>
+    <button onclick="mostrarDadosContas()">Mostrar Dados das Contas</button>
+    <div id="output-contas" class="output"></div>
+
+    <script>
+        class Retangulo {
+            constructor(base, altura) {
+                this.base = base;
+                this.altura = altura;
+            }
+
+            calcularArea() {
+                return this.base * this.altura;
+            }
+        }
+
+        function calcularAreaRetangulo() {
+            const base = parseFloat(document.getElementById('base').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+
+            if (isNaN(base) || isNaN(altura) || base <= 0 || altura <= 0) {
+                document.getElementById('output-retangulo').innerText = "Por favor, insira valores válidos para a base e a altura.";
+                return;
+            }
+
+            const retangulo = new Retangulo(base, altura);
+            const area = retangulo.calcularArea();
+            document.getElementById('output-retangulo').innerText = `A área do retângulo é: ${area} cm²`;
+        }
+
+        class Conta {
+            constructor(nomeCorrentista, banco, numeroConta, saldo) {
+                this.nomeCorrentista = nomeCorrentista;
+                this.banco = banco;
+                this.numeroConta = numeroConta;
+                this.saldo = saldo;
+            }
+        }
+
+        class Corrente extends Conta {
+            constructor(nomeCorrentista, banco, numeroConta, saldo, saldoEspecial) {
+                super(nomeCorrentista, banco, numeroConta, saldo);
+                this.saldoEspecial = saldoEspecial;
+            }
+        }
+
+        class Poupanca extends Conta {
+            constructor(nomeCorrentista, banco, numeroConta, saldo, juros, dataVencimento) {
+                super(nomeCorrentista, banco, numeroConta, saldo);
+                this.juros = juros;
+                this.dataVencimento = dataVencimento;
+            }
+        }
+
+        function mostrarDadosContas() {
+            const contaCorrente = new Corrente("Alexandre", "Banco Santander", "98765-4", 7500, 1500);
+            const contaPoupanca = new Poupanca("Beatriz", "Banco Itaú", "54321-9", 4200, 0.8, "15/11/2024");
+
+            const dadosCorrente = `Conta Corrente - Nome: ${contaCorrente.nomeCorrentista}, Banco: ${contaCorrente.banco}, Número da Conta: ${contaCorrente.numeroConta}, Saldo: R$${contaCorrente.saldo}, Saldo Especial: R$${contaCorrente.saldoEspecial}`;
+            const dadosPoupanca = `Conta Poupança - Nome: ${contaPoupanca.nomeCorrentista}, Banco: ${contaPoupanca.banco}, Número da Conta: ${contaPoupanca.numeroConta}, Saldo: R$${contaPoupanca.saldo}, Juros: ${contaPoupanca.juros}%, Data de Vencimento: ${contaPoupanca.dataVencimento}`;
+
+            document.getElementById('output-contas').innerHTML = `${dadosCorrente}<br><br>${dadosPoupanca}`;
+        }
+    </script>
+</body>
+</html>

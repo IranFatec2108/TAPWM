@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Contato</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #ffffff; 
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            width: 400px;
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container h2 {
+            color: #3498db;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .form-container input, 
+        .form-container textarea {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-container input:focus,
+        .form-container textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .form-container textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .form-container label {
+            display: block;
+            margin: 5px 0;
+            text-align: left;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .radio-group label {
+            margin-left: 10px;
+            margin-right: 20px;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            padding: 12px 20px;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button[type="submit"] {
+            background-color: #27ae60;
+        }
+
+        .form-container button[type="reset"] {
+            background-color: #e74c3c;
+        }
+
+        .form-container button:hover {
+            opacity: 0.9;
+        }
+
+        .form-container button:active {
+            transform: scale(0.98);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Formulário de Contato</h2>
+    <form name="formularioPrincipal" onsubmit="return validar()">
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+
+        <label for="comentario">Comentário</label>
+        <textarea id="comentario" name="comentario" placeholder="Escreva sua mensagem"></textarea>
+
+        <label>Pesquisa</label>
+        <div class="radio-group">
+            <span>É a sua primeira vez aqui?</span><br>
+            <input type="radio" id="sim" name="pesquisa" value="sim">
+            <label for="sim">Sim</label>
+            <input type="radio" id="nao" name="pesquisa" value="nao">
+            <label for="nao">Não</label>
+        </div>
+
+        <button type="submit">Enviar</button>
+        <button type="reset">Limpar</button>
+    </form>
+</div>
+
+<script>
+    function validar() {
+        const form = document.formularioPrincipal.elements;
+
+        const nome = form['nome'].value.trim();
+        if (nome.length < 10) {
+            alert('O nome deve ter pelo menos 10 caracteres.');
+            return false;
+        }
+
+        const email = form['email'].value.trim();
+        if (!email.includes('@') || !email.includes('.')) {
+            alert('O e-mail deve conter "@" e ".".');
+            return false;
+        }
+
+        const comentario = form['comentario'].value.trim();
+        if (comentario.length < 20) {
+            alert('O comentário deve ter no mínimo 20 caracteres.');
+            return false;
+        }
+
+        const pesquisa = form['pesquisa'].value;
+        if (!pesquisa) {
+            alert('Por favor, responda à pesquisa.');
+            return false;
+        } else if (pesquisa === 'nao') {
+            alert('Que bom que você voltou a visitar esta página!');
+        } else {
+            alert('Volte sempre a esta página!');
+        }
+
+        return true;
+    }
+</script>
+
+</body>
+</html>
